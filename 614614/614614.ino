@@ -1,0 +1,143 @@
+int a,b;
+int B[]={3,4,5,6,7,8,9};
+int S[]={31,33,35,37,39,41,43,45};
+int L[]={22,24,26,28,30,32,34,36};
+int s7[][8]=
+{
+  {0,1,1,0,0,0,0,0},
+  {1,1,0,1,1,0,1,0},
+  {1,1,1,1,0,0,1,0},
+  {0,1,1,0,0,1,1,0},
+  {1,0,1,1,0,1,1,0},
+  {0,0,1,1,1,1,1,0},
+  {1,1,1,0,0,0,0,0},
+  {1,1,1,1,1,1,1,0},
+  {1,1,1,0,0,1,1,0},
+  {0,0,0,0,0,0,0,0},
+};
+void setup()
+{
+  for(a=0;a<=7;a++)
+  {
+    pinMode(B[a],INPUT);
+    pinMode(S[a],OUTPUT);
+    pinMode(L[a],OUTPUT);
+  }
+}
+//________________________________________________
+void loop()
+{
+  if(digitalRead(B[6])==0)
+  {
+    for(a=0;a<=7;a++)
+    {
+      digitalWrite(L[a],1);
+      delay(1000);
+      digitalWrite(L[a],0);
+    }
+//________________________________________________
+    delay(1000);
+  }
+  if(digitalRead(B[5])==0)
+  {
+    for(a=7;a>=0;a--)
+    {
+      digitalWrite(L[a],1);
+      digitalWrite(L[a-1],1);
+      delay(1000);
+      digitalWrite(L[a],0);
+      digitalWrite(L[a-1],0);
+    }
+    delay(1000);
+  }
+//________________________________________________
+  if(digitalRead(B[4])==0)
+  {
+    for(a=0;a<=7;a++)
+    {
+      digitalWrite(L[a],1);
+      delay(1000);
+    }
+    for(a=0;a<=7;a++)
+    {
+      digitalWrite(L[a],0);
+    }
+    delay(1000);
+  }
+//________________________________________________
+  if(digitalRead(B[3])==0)
+  {
+    for(a=0,b=7;a<=3,b>=4;a++,b--)
+    {
+      digitalWrite(L[a],1);
+      digitalWrite(L[b],1);
+      delay(1000);
+      digitalWrite(L[a],0);
+      digitalWrite(L[b],0);
+    }
+    delay(1000);
+  }
+//________________________________________________
+  if(digitalRead(B[2])==0)
+  {
+    for(a=7;a>=0;a--)
+    {
+      digitalWrite(L[a],1);
+      delay(1000);
+      digitalWrite(L[a],0);
+    }
+    for(a=1;a<=7;a++)
+    {
+      digitalWrite(L[a],1);
+      delay(1000);
+      digitalWrite(L[a],0);
+    }
+    delay(1000);
+  }
+//________________________________________________
+  if(digitalRead(B[1])==0)
+  {
+    for(a=0;a<=7;a++)
+    {
+      digitalWrite(S[a],1);
+      delay(1000);
+    }
+    for(a=0;a<=7;a++)
+    {
+      digitalWrite(S[a],0);
+    }
+    delay(1000);
+  }
+//________________________________________________
+  if(digitalRead(B[0])==0)
+  {
+    for(a=0;a<=9;a++)
+    {
+      for(b=0;b<=7;b++)
+      {
+        digitalWrite(S[b],s7[a][b]);
+      }
+      delay(500);
+      if(digitalRead(B[0])==0)
+      {
+        while(1)
+        {
+          delay(100);
+          if(digitalRead(B[0])==1)
+          {
+            break;
+          }
+        }
+        while(1)
+        {
+          delay(100);
+          if(digitalRead(B[0])==0)
+          {
+            break;
+          }
+        }
+      }
+    }
+    delay(1000);
+  }
+}
